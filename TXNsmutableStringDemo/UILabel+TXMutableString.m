@@ -147,5 +147,71 @@
     self.attributedText = attributedString;
 }
 
+#pragma mark - 改变字的描边
+- (void)TX_changeStrokeWidthWithTextStrikethroughWidth:(NSNumber *)textStrokeWidth {
+    [self TX_changeStrokeWidthWithTextStrikethroughWidth:textStrokeWidth changeText:self.text];
+}
+- (void)TX_changeStrokeWidthWithTextStrikethroughWidth:(NSNumber *)textStrokeWidth changeText:(NSString *)text {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange range = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (range.location != NSNotFound) {
+        [attributedString addAttribute:NSStrokeWidthAttributeName value:textStrokeWidth range:range];
+    }
+    self.attributedText = attributedString;
+}
+#pragma mark - 改变字段的描边颜色
+- (void)TX_changeStrokeColorWithTextStrikethroughColor:(UIColor *)textStrokeColor {
+    [self TX_changeStrokeColorWithTextStrikethroughColor:textStrokeColor changeText:self.text];
+}
+
+- (void)TX_changeStrokeColorWithTextStrikethroughColor:(UIColor *)textStrokeColor changeText:(NSString *)text {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange range = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (range.location != NSNotFound) {
+        [attributedString addAttribute:NSStrokeColorAttributeName value:textStrokeColor range:range];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字的阴影
+
+- (void)TX_changeShadowWithTextShadow:(NSShadow *)textShadow {
+    [self TX_changeShadowWithTextShadow:textShadow changeText:self.text];
+}
+
+- (void)TX_changeShadowWithTextShadow:(NSShadow *)textShadow changeText:(NSString *)text {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange range = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (range.location != NSNotFound) {
+        [attributedString addAttribute:NSShadowAttributeName value:textShadow range:range];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 添加链接
+- (void)TX_changeLinkWithTextLink:(NSString *)linkURL changeText:(NSString *)text {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange range = [self.text rangeOfString:text];
+    if (range.location != NSNotFound) {
+         [attributedString addAttributes:@{NSLinkAttributeName:[NSURL URLWithString:linkURL],  NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)} range:range];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字的基准线偏移 value>0坐标往上偏移 value<0坐标往下偏移
+- (void)TX_changeBaselineOffsetWithTextBaselineOffset:(NSNumber *)textBaselineOffset {
+    [self TX_changeBaselineOffsetWithTextBaselineOffset:textBaselineOffset changeText:self.text];
+}
+
+- (void)TX_changeBaselineOffsetWithTextBaselineOffset:(NSNumber *)textBaselineOffset changeText:(NSString *)text {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange range = [self.text rangeOfString:text];
+    if (range.location != NSNotFound) {
+        [attributedString addAttribute:NSBaselineOffsetAttributeName value:textBaselineOffset range:range];
+    }
+    self.attributedText = attributedString;
+}
+
+
 
 @end

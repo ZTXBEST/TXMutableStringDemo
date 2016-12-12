@@ -187,4 +187,78 @@
  @param text               改变的字段
  */
 - (void)TX_changeUnderlineColorWithTextUnderlineColor:(UIColor *)textUnderlineColor changeText:(NSString *)text;
+
+#pragma mark - 改变字的描边
+
+/**
+ 改变字的描边
+
+ @param textStrokeWidth 描边宽度
+ */
+- (void)TX_changeStrokeWidthWithTextStrikethroughWidth:(NSNumber *)textStrokeWidth;
+
+/**
+ 改变句中某些字段的描边
+
+ @param textStrokeWidth 描边宽度
+ @param text            改变的字段
+ */
+- (void)TX_changeStrokeWidthWithTextStrikethroughWidth:(NSNumber *)textStrokeWidth changeText:(NSString *)text;
+
+#pragma mark - 改变字的描边颜色
+
+/**
+ 改变字的描边颜色
+
+ @param textStrokeColor 描边颜色
+ */
+- (void)TX_changeStrokeColorWithTextStrikethroughColor:(UIColor *)textStrokeColor;
+
+/**
+ 改变句中某些字段的描边颜色
+ 
+ @param textStrokeColor 描边颜色
+ @param text            改变的字段
+ */
+- (void)TX_changeStrokeColorWithTextStrikethroughColor:(UIColor *)textStrokeColor changeText:(NSString *)text;
+
+#pragma mark - 改变字的阴影
+
+/**
+ 改变字的阴影
+
+ @param textShadow 改变的阴影
+ */
+- (void)TX_changeShadowWithTextShadow:(NSShadow *)textShadow;
+
+/**
+ 改变句中某些字段的阴影
+
+ @param textShadow 改变的阴影
+ @param text       改变的字段
+ */
+- (void)TX_changeShadowWithTextShadow:(NSShadow *)textShadow changeText:(NSString *)text;
+
+#pragma mark - 添加链接
+- (void)TX_changeLinkWithTextLink:(NSString *)linkURL changeText:(NSString *)text;
+
+
+#pragma mark - 改变字的基准线偏移 value>0坐标往上偏移 value<0坐标往下偏移
+/**
+ 改变字的基准线偏移
+
+ @param textBaselineOffset 改变的偏移大小
+ */
+- (void)TX_changeBaselineOffsetWithTextBaselineOffset:(NSNumber *)textBaselineOffset NS_AVAILABLE(10_0, 7_0);
+
+/**
+ 改变句中某些字段的基准线偏移
+
+ @param textBaselineOffset 改变的偏移大小
+ @param text               改变的字段
+ */
+- (void)TX_changeBaselineOffsetWithTextBaselineOffset:(NSNumber *)textBaselineOffset changeText:(NSString *)text NS_AVAILABLE(10_0, 7_0);
+
+
+
 @end

@@ -63,11 +63,12 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identifier = @"identifier";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    }
+//    static NSString *identifier = @"identifier";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+//    if (!cell) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+//    }
+    UITableViewCell *cell = [[UITableViewCell alloc] init];
     cell.textLabel.numberOfLines = 0;
     switch (indexPath.row) {
         case 0:
@@ -147,6 +148,63 @@
         }
             break;
             
+        case 10:
+        {
+            cell.textLabel.text = @"红色的描边蓝色的描边";
+            [cell.textLabel TX_changeStrokeColorWithTextStrikethroughColor:[UIColor redColor] changeText:@"红色"];
+            [cell.textLabel TX_changeStrokeWidthWithTextStrikethroughWidth:@(10.0) changeText:@"红色"];
+            [cell.textLabel TX_changeStrokeColorWithTextStrikethroughColor:[UIColor blueColor] changeText:@"蓝色"];
+            [cell.textLabel TX_changeStrokeWidthWithTextStrikethroughWidth:@(3.0) changeText:@"蓝色"];
+        }
+            break;
+        case 11:
+        {
+            cell.textLabel.text = @"红色的阴影蓝色的阴影";
+            NSShadow *redShadow = [[NSShadow alloc] init];
+            redShadow.shadowOffset = CGSizeMake(2.0, 2.0);
+//            redShadow.shadowBlurRadius = 0.5;
+            redShadow.shadowColor = [UIColor redColor];
+            [cell.textLabel TX_changeShadowWithTextShadow:redShadow changeText:@"红色"];
+            
+            NSShadow *blueShadow = [[NSShadow alloc] init];
+            blueShadow.shadowOffset = CGSizeMake(1.0, 1.0);
+//            blueShadow.shadowBlurRadius = 0.5;
+            blueShadow.shadowColor = [UIColor redColor];
+            [cell.textLabel TX_changeShadowWithTextShadow:blueShadow changeText:@"蓝色"];
+            
+        }
+            break;
+            
+        case 12:
+        {
+            self.textView.frame = CGRectMake(20.0, 0.0, self.view.width-25.0, cell.contentView.height);
+            self.textView.backgroundColor = [UIColor clearColor];
+            self.textView.editable = NO;
+            [cell.contentView addSubview:self.textView];
+            
+            NSString *strLink = @"百度链接点击跳转到百度 淘宝链接点击跳转到淘宝";
+            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:strLink];
+            [attributedString addAttributes:@{NSLinkAttributeName:[NSURL URLWithString:@"http://www.baidu.com"], NSFontAttributeName:cell.textLabel.font, NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)} range:[strLink rangeOfString:@"百度链接"]];
+            
+            [attributedString addAttributes:@{NSLinkAttributeName:[NSURL URLWithString:@"http://www.taobao.com"], NSFontAttributeName:cell.textLabel.font, NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)} range:[strLink rangeOfString:@"淘宝链接"]];
+            self.textView.attributedText = attributedString;
+            
+        }
+            break;
+            
+            case 13:
+        {
+            cell.textLabel.text = @"字的基准线向下偏移向上偏移";
+            [cell.textLabel TX_changeBaselineOffsetWithTextBaselineOffset:@-5.0 changeText:@"向下偏移"];
+            [cell.textLabel TX_changeBaselineOffsetWithTextBaselineOffset:@5.0 changeText:@"向上偏移"];
+        }
+            break;
+            
+            case 14:
+        {
+            
+        }
+            break;
         default:
             break;
     }
@@ -154,6 +212,18 @@
     
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - UITextViewDelegate
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange NS_AVAILABLE_IOS(7_0)
+{
+    NSLog(@"%@",URL);
+    return YES;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
